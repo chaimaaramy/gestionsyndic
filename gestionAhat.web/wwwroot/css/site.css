@@ -1,71 +1,209 @@
-/* Style g�n�ral pour les tables */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 14px;
-    background-color: #fff;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+/* ==========================================================
+   ✅ PRO HEADER + HERO CENTERED (CSS ONLY)
+   Colle tout en bas du CSS
+   ========================================================== */
+
+:root {
+    --container-max: 1180px;
+    /* hero image */
+    --hero-max-w: 980px;
+    --hero-h: 360px;
+    --hero-h-md: 300px;
+    --hero-h-sm: 220px;
+    --hero-radius: 18px;
+    /* topbar/header */
+    --logo-h: 44px;
+    --header-border: rgba(17,24,39,.12);
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #2E593F;
 }
 
-/* En-t�te */
-thead {
-    background-color: #258cfb; /* coh�rent avec ton focus */
-    color: #fff;
+/* ---------------------------
+   1) TOPBAR plus pro
+   (sans toucher HTML)
+   --------------------------- */
+
+/* zone topbar */
+.topbar {
+    background: #fff !important;
+    border-bottom: 1px solid var(--header-border) !important;
 }
 
-    thead th {
-        padding: 12px;
-        text-align: left;
-        font-weight: 600;
-        text-transform: uppercase;
-        border-bottom: 2px solid #ddd;
+/* alignement + largeur */
+.topbar-container {
+    max-width: var(--container-max) !important;
+    margin: 0 auto !important;
+    padding: 10px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 14px !important;
+}
+
+/* texte topbar */
+.topbar-right {
+    color: var(--muted) !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    white-space: nowrap !important;
+}
+
+/* logo topbar */
+img.logo-topbar {
+    height: var(--logo-h) !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+/* ---------------------------
+   2) Titres améliorés (h1/h2) 
+   --------------------------- */
+main.pb-3 h1,
+main.pb-3 h2 {
+    color: var(--text) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15 !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    margin-bottom: 0.5em !important;
+}
+
+main.pb-3 h1 {
+    font-weight: 800 !important;
+    font-size: clamp(32px, 4vw, 52px) !important;
+    background: linear-gradient(135deg, var(--text) 0%, color-mix(in srgb, var(--text) 80%, transparent) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+}
+
+    main.pb-3 h1::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: -12px !important;
+        left: 0 !important;
+        width: 80px !important;
+        height: 4px !important;
+        background: linear-gradient(90deg, var(--accent, #3b82f6) 0%, transparent 100%) !important;
+        border-radius: 2px !important;
     }
 
-/* Corps */
-tbody tr {
-    border-bottom: 1px solid #ddd;
+main.pb-3 h2 {
+    font-weight: 700 !important;
+    font-size: clamp(24px, 2.8vw, 36px) !important;
+    color: color-mix(in srgb, var(--text) 90%, transparent) !important;
+    padding-bottom: 8px !important;
+    border-bottom: 2px solid var(--border-light, rgba(0,0,0,0.08)) !important;
 }
 
-    tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-tbody td {
-    padding: 12px;
-    color: #333;
+main.pb-3 p {
+    color: color-mix(in srgb, var(--muted) 95%, var(--text)) !important;
+    max-width: 72ch !important;
+    line-height: 1.7 !important;
+    font-size: 1.05em !important;
+    margin-top: 1em !important;
+    margin-bottom: 1.5em !important;
 }
 
-/* Effet hover */
-tbody tr:hover {
-    background-color: #eaf4ff;
-    transition: background-color 0.3s ease;
+/* Effet de soulignement au survol pour h2 */
+main.pb-3 h2:hover {
+    border-bottom-color: var(--accent, #3b82f6) !important;
+    transition: border-color 0.3s ease !important;
 }
 
-/* Responsive */
-.table-responsive {
-    overflow-x: auto;
+/* Animation subtile au chargement */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Table en mode sombre (si tu actives dark mode via Bootstrap) */
-@media (prefers-color-scheme: dark) {
-    table {
-        background-color: #1e1e1e;
-        color: #ddd;
+main.pb-3 h1,
+main.pb-3 h2 {
+    animation: fadeInUp 0.5s ease-out !important;
+}
+
+    /* Meilleure hiérarchie visuelle */
+    main.pb-3 h1 + p {
+        font-size: 1.2em !important;
+        line-height: 1.6 !important;
+        color: color-mix(in srgb, var(--muted) 85%, var(--text)) !important;
+        margin-bottom: 2em !important;
+        padding-left: 2px !important;
     }
 
-    thead {
-        background-color: #258cfb;
-        color: #fff;
+/* ---------------------------
+   3) ✅ HERO IMAGE AU MILIEU
+   (plus de vide à droite)
+   --------------------------- */
+
+/* on annule l'ancien grid (si appliqué) */
+main.pb-3 > * {
+    display: block;
+}
+
+/* cible : la première grosse image de la page (sous le titre) */
+main.pb-3 img:not(.logo-topbar):first-of-type {
+    width: 100% !important;
+    max-width: var(--hero-max-w) !important; /* ✅ centrée */
+    height: var(--hero-h) !important; /* ✅ hauteur fixe */
+    object-fit: cover !important;
+    border-radius: var(--hero-radius) !important;
+    margin: 18px auto !important; /* ✅ vide gauche/droite */
+    display: block !important;
+    box-shadow: 0 12px 28px rgba(0,0,0,.12) !important;
+    border: 1px solid rgba(0,0,0,.08) !important;
+}
+
+/* si l'image a w-100/img-fluid, on force pareil */
+main.pb-3 img.w-100:not(.logo-topbar):first-of-type,
+main.pb-3 img.img-fluid:not(.logo-topbar):first-of-type {
+    max-width: var(--hero-max-w) !important;
+    height: var(--hero-h) !important;
+}
+
+/* ---------------------------
+   4) Services / cartes : images propres
+   --------------------------- */
+.card-img-top,
+.services img:not(.logo-topbar),
+.service-item img:not(.logo-topbar) {
+    height: 180px !important;
+    object-fit: cover !important;
+    border-radius: 16px !important;
+}
+
+/* ---------------------------
+   5) Responsive
+   --------------------------- */
+@media (max-width: 992px) {
+    main.pb-3 img:not(.logo-topbar):first-of-type {
+        height: var(--hero-h-md) !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 576px) {
+    img.logo-topbar {
+        height: 40px !important;
     }
 
-    tbody tr:nth-child(even) {
-        background-color: #2a2a2a;
+    main.pb-3 img:not(.logo-topbar):first-of-type {
+        height: var(--hero-h-sm) !important;
+        border-radius: 14px !important;
+        margin: 14px auto !important;
     }
 
-    tbody tr:hover {
-        background-color: #333;
+    .topbar-container {
+        padding: 10px 14px !important;
     }
 }
